@@ -1,0 +1,25 @@
+{
+    "name": "frankdejonge/locked-console-command",
+    "description": "A symfony/console command decorator which locks.",
+    "autoload": {
+        "psr-4": {
+            "FrankDeJonge\\LockedConsoleCommand\\": "src/"
+        }
+    },
+    "require": {
+        "symfony/console": "~2.6",
+        "symfony/filesystem": "~2.6",
+        "henrikbjorn/phpspec-code-coverage": "~1.0"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "~2.1",
+        "symfony/var-dumper": "~2.6"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "frankdejonge",
+            "email": "info@frenky.net"
+        }
+    ]
+}

@@ -1,0 +1,6 @@
+suites:
+  locked_command_suite:
+    namespace: FrankDeJonge\LockedConsoleCommand
+    psr4_prefix: FrankDeJonge\LockedConsoleCommand
+extensions:
+    - PhpSpec\Extension\CodeCoverageExtension
