@@ -2,6 +2,7 @@
 
 namespace FrankDeJonge\LockedConsoleCommand;
 
+use Exception;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\HelperSet;
@@ -119,8 +120,10 @@ class LockedCommandDecorator extends Command
 
         try {
             $result = $this->decoratedCommand->run($input, $output);
-        } finally {
             $lock->release();
+        } catch (Exception $e) {
+            $lock->release();
+            throw $e;
         }
 
         return $result;
