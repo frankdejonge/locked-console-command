@@ -12,7 +12,6 @@
     },
     "require-dev": {
         "phpspec/phpspec": "~2.1",
-        "symfony/var-dumper": "~2.6",
         "henrikbjorn/phpspec-code-coverage": "~1.0"
     },
     "license": "MIT",
