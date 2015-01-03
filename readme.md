@@ -65,3 +65,4 @@ class SomeQueueWorker extends Command implements SpecifiesLockName
         return 'root:name:'.$input->getArgument('worker-id');
     }
 }
+```
