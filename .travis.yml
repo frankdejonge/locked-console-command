@@ -10,7 +10,7 @@ before_script:
   - travis_retry composer install --no-interaction --prefer-source --dev
 
 script:
-  - bin/phpspec run
+  - vendor/bin/phpspec run
 
 after_script:
   - wget https://scrutinizer-ci.com/ocular.phar
