@@ -89,7 +89,7 @@ class LockedCommandDecorator extends Command
     }
 
     /**
-     * @param string|LockHandler $lockName
+     * @param string|LockHandler|null $lockName
      */
     public function setLockName($lockName)
     {
