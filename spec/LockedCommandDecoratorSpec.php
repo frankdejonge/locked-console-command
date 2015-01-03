@@ -2,7 +2,6 @@
 
 namespace spec\FrankDeJonge\LockedConsoleCommand;
 
-use FrankDeJonge\LockedConsoleCommand\SpecifiesLockName;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\Console\Application;
@@ -113,6 +112,7 @@ class LockedCommandDecoratorSpec extends ObjectBehavior
         $this->beConstructedWith($command, 'lock:name');
         $lockHandler = new LockHandler('lock:name');
         $lockHandler->lock();
+        $output->getVerbosity()->willReturn(OutputInterface::VERBOSITY_VERBOSE);
         $output->writeln(Argument::type('string'))->shouldBeCalled();
         $this->run($input, $output);
     }
