@@ -60,5 +60,8 @@ The SpecifiesLockName interface is especially handy with dynamic lock names, for
 
 class SomeQueueWorker extends Command implements SpecifiesLockName
 {
-    
+    public function getLockName(InputInterface $input)
+    {
+        return 'root:name:'.$input->getArgument('worker-id');
+    }
 }
