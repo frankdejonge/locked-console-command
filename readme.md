@@ -7,7 +7,7 @@ Symfony's Filesystem Component.
 
 ## Credits
 
-The idea wasn't initially mine, I stole it from @seldaek.
+The idea wasn't initially mine, I stole it from @Seldaek.
 
 # Installation
 
