@@ -41,9 +41,7 @@ class LockedCommandDecorator extends Command
     }
 
     /**
-     * Ignores validation errors.
-     *
-     * This is mainly useful for the help command.
+     * {@inheritdoc}
      */
     public function ignoreValidationErrors()
     {
@@ -101,7 +99,8 @@ class LockedCommandDecorator extends Command
     /**
      * Runs the command.
      *
-     *
+     * Before the decorated command is run, a lock is requested.
+     * When failed to acquire the lock, the command exits.
      *
      * @param InputInterface  $input  An InputInterface instance
      * @param OutputInterface $output An OutputInterface instance
@@ -128,20 +127,7 @@ class LockedCommandDecorator extends Command
     }
 
     /**
-     * Sets the code to execute when running this command.
-     *
-     * If this method is used, it overrides the code defined
-     * in the execute() method.
-     *
-     * @param callable $code A callable(InputInterface $input, OutputInterface $output)
-     *
-     * @return Command The current instance
-     *
-     * @throws \InvalidArgumentException
-     *
-     * @see execute()
-     *
-     * @api
+     * {@inheritdoc}
      */
     public function setCode($code)
     {
@@ -151,11 +137,7 @@ class LockedCommandDecorator extends Command
     }
 
     /**
-     * Merges the application definition with the command definition.
-     *
-     * This method is not part of public API and should not be used directly.
-     *
-     * @param bool $mergeArgs Whether to merge or not the Application definition arguments to Command definition arguments
+     * {@inheritdoc}
      */
     public function mergeApplicationDefinition($mergeArgs = true)
     {
@@ -163,13 +145,7 @@ class LockedCommandDecorator extends Command
     }
 
     /**
-     * Sets an array of argument and option instances.
-     *
-     * @param array|InputDefinition $definition An array of argument and option instances or a definition instance
-     *
-     * @return Command The current instance
-     *
-     * @api
+     * {@inheritdoc}
      */
     public function setDefinition($definition)
     {
@@ -179,11 +155,7 @@ class LockedCommandDecorator extends Command
     }
 
     /**
-     * Gets the InputDefinition attached to this Command.
-     *
-     * @return InputDefinition An InputDefinition instance
-     *
-     * @api
+     * {@inheritdoc}
      */
     public function getDefinition()
     {
@@ -191,14 +163,7 @@ class LockedCommandDecorator extends Command
     }
 
     /**
-     * Gets the InputDefinition to be used to create XML and Text representations of this Command.
-     *
-     * Can be overridden to provide the original command representation when it would otherwise
-     * be changed by merging with the application InputDefinition.
-     *
-     * This method is not part of public API and should not be used directly.
-     *
-     * @return InputDefinition An InputDefinition instance
+     * {@inheritdoc}
      */
     public function getNativeDefinition()
     {
@@ -206,16 +171,7 @@ class LockedCommandDecorator extends Command
     }
 
     /**
-     * Adds an argument.
-     *
-     * @param string $name        The argument name
-     * @param int    $mode        The argument mode: InputArgument::REQUIRED or InputArgument::OPTIONAL
-     * @param string $description A description text
-     * @param mixed  $default     The default value (for InputArgument::OPTIONAL mode only)
-     *
-     * @return Command The current instance
-     *
-     * @api
+     * {@inheritdoc}
      */
     public function addArgument($name, $mode = null, $description = '', $default = null)
     {
@@ -225,17 +181,7 @@ class LockedCommandDecorator extends Command
     }
 
     /**
-     * Adds an option.
-     *
-     * @param string $name        The option name
-     * @param string $shortcut    The shortcut (can be null)
-     * @param int    $mode        The option mode: One of the InputOption::VALUE_* constants
-     * @param string $description A description text
-     * @param mixed  $default     The default value (must be null for InputOption::VALUE_REQUIRED or InputOption::VALUE_NONE)
-     *
-     * @return Command The current instance
-     *
-     * @api
+     * {@inheritdoc}
      */
     public function addOption($name, $shortcut = null, $mode = null, $description = '', $default = null)
     {
@@ -245,20 +191,7 @@ class LockedCommandDecorator extends Command
     }
 
     /**
-     * Sets the name of the command.
-     *
-     * This method can set both the namespace and the name if
-     * you separate them by a colon (:)
-     *
-     *     $command->setName('foo:bar');
-     *
-     * @param string $name The command name
-     *
-     * @return Command The current instance
-     *
-     * @throws \InvalidArgumentException When the name is invalid
-     *
-     * @api
+     * {@inheritdoc}
      */
     public function setName($name)
     {
@@ -268,16 +201,7 @@ class LockedCommandDecorator extends Command
     }
 
     /**
-     * Sets the process title of the command.
-     *
-     * This feature should be used only when creating a long process command,
-     * like a daemon.
-     *
-     * PHP 5.5+ or the proctitle PECL library is required
-     *
-     * @param string $title The process title
-     *
-     * @return Command The current instance
+     * {@inheritdoc}
      */
     public function setProcessTitle($title)
     {
@@ -287,11 +211,7 @@ class LockedCommandDecorator extends Command
     }
 
     /**
-     * Returns the command name.
-     *
-     * @return string The command name
-     *
-     * @api
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -299,13 +219,7 @@ class LockedCommandDecorator extends Command
     }
 
     /**
-     * Sets the description for the command.
-     *
-     * @param string $description The description for the command
-     *
-     * @return Command The current instance
-     *
-     * @api
+     * {@inheritdoc}
      */
     public function setDescription($description)
     {
@@ -315,11 +229,7 @@ class LockedCommandDecorator extends Command
     }
 
     /**
-     * Returns the description for the command.
-     *
-     * @return string The description for the command
-     *
-     * @api
+     * {@inheritdoc}
      */
     public function getDescription()
     {
@@ -327,13 +237,7 @@ class LockedCommandDecorator extends Command
     }
 
     /**
-     * Sets the help for the command.
-     *
-     * @param string $help The help for the command
-     *
-     * @return Command The current instance
-     *
-     * @api
+     * {@inheritdoc}
      */
     public function setHelp($help)
     {
@@ -343,11 +247,7 @@ class LockedCommandDecorator extends Command
     }
 
     /**
-     * Returns the help for the command.
-     *
-     * @return string The help for the command
-     *
-     * @api
+     * {@inheritdoc}
      */
     public function getHelp()
     {
@@ -355,10 +255,7 @@ class LockedCommandDecorator extends Command
     }
 
     /**
-     * Returns the processed help for the command replacing the %command.name% and
-     * %command.full_name% patterns with the real values dynamically.
-     *
-     * @return string The processed help for the command
+     * {@inheritdoc}
      */
     public function getProcessedHelp()
     {
@@ -366,15 +263,7 @@ class LockedCommandDecorator extends Command
     }
 
     /**
-     * Sets the aliases for the command.
-     *
-     * @param string[] $aliases An array of aliases for the command
-     *
-     * @return Command The current instance
-     *
-     * @throws \InvalidArgumentException When an alias is invalid
-     *
-     * @api
+     * {@inheritdoc}
      */
     public function setAliases($aliases)
     {
@@ -384,11 +273,7 @@ class LockedCommandDecorator extends Command
     }
 
     /**
-     * Returns the aliases for the command.
-     *
-     * @return array An array of aliases for the command
-     *
-     * @api
+     * {@inheritdoc}
      */
     public function getAliases()
     {
@@ -396,9 +281,7 @@ class LockedCommandDecorator extends Command
     }
 
     /**
-     * Returns the synopsis for the command.
-     *
-     * @return string The synopsis
+     * {@inheritdoc}
      */
     public function getSynopsis()
     {
@@ -406,15 +289,7 @@ class LockedCommandDecorator extends Command
     }
 
     /**
-     * Gets a helper instance by name.
-     *
-     * @param string $name The helper name
-     *
-     * @return mixed The helper value
-     *
-     * @throws \InvalidArgumentException if the helper is not defined
-     *
-     * @api
+     * {@inheritdoc}
      */
     public function getHelper($name)
     {
@@ -422,6 +297,9 @@ class LockedCommandDecorator extends Command
     }
 
     /**
+     * Get the locking helper.
+     *
+     * @param InputInterface $input
      * @return LockHandler
      */
     private function getLockHandler(InputInterface $input)
@@ -439,6 +317,7 @@ class LockedCommandDecorator extends Command
     /**
      * Get the name for the lock.
      *
+     * @param InputInterface $input
      * @return string
      */
     public function getLockName(InputInterface $input)
@@ -484,6 +363,7 @@ class LockedCommandDecorator extends Command
     /**
      * Write the "is locked" message.
      *
+     * @param InputInterface  $input
      * @param OutputInterface $output
      */
     private function writeLockedMessage(InputInterface $input, OutputInterface $output)
