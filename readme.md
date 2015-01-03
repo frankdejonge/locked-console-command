@@ -3,7 +3,7 @@
 [![Author](http://img.shields.io/badge/author-@frankdejonge-blue.svg?style=flat-square)](https://twitter.com/frankdejonge)
 [![Build Status](https://img.shields.io/travis/frankdejonge/locked-console-command/master.svg?style=flat-square)](https://travis-ci.org/frankdejonge/locked-console-command)
 [![Quality Score](https://img.shields.io/scrutinizer/g/frankdejonge/locked-console-command.svg?style=flat-square)](https://scrutinizer-ci.com/g/frankdejonge/locked-console-command)
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](license.md)
 [![Packagist Version](https://img.shields.io/packagist/v/frankdejonge/locked-console-command.svg?style=flat-square)](https://packagist.org/packages/frankdejonge/locked-console-command)
 [![Total Downloads](https://img.shields.io/packagist/dt/frankdejonge/locked-console-command.svg?style=flat-square)](https://packagist.org/packages/frankdejonge/locked-console-command)
 [![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/frankdejonge/locked-console-command.svg?style=flat-square)](https://scrutinizer-ci.com/g/frankdejonge/locked-console-command/code-structure)
