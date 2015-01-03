@@ -7,7 +7,7 @@
         }
     },
     "require": {
-        "symfony/console": "~2.6",
+        "symfony/console": "~2.5",
         "symfony/filesystem": "~2.6"
     },
     "require-dev": {
