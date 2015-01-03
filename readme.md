@@ -47,7 +47,9 @@ There are two configurable parts to influence locking.
 
 ### Trough __constructor argument injection
 
+```php
 $command = new LockedCommandDecorator($yourCommand, 'lock-name', '/lock/path'));
+```
 
 ### Through interface implementations in the wrapper Command
 
