@@ -2,7 +2,6 @@
 
 namespace FrankDeJonge\LockedConsoleCommand;
 
-use RuntimeException;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\HelperSet;
