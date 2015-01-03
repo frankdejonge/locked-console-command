@@ -108,25 +108,15 @@ class LockedCommandDecorator extends Command
      * @param OutputInterface $output An OutputInterface instance
      *
      * @return int The command exit code
-     *
-     * @throws RuntimeException
      */
     public function run(InputInterface $input, OutputInterface $output)
     {
         $lock = $this->getLockHandler();
 
         if (! $lock->lock()) {
-            $commandName = $this->decoratedCommand->getName();
-            $lockName = $this->getLockName();
-            $lockPath = $this->getLockPath();
-            $message = sprintf(
-                'Command "%s" is already running, locked with "%s" at path "%s"',
-                $commandName,
-                $lockName,
-                $lockPath
-            );
+            $this->writeLockedMessage($output);
 
-            throw new RuntimeException($message);
+            return 0;
         }
 
         try {
@@ -489,5 +479,25 @@ class LockedCommandDecorator extends Command
         }
 
         return null;
+    }
+
+    /**
+     * Write the "is locked" message.
+     *
+     * @param OutputInterface $output
+     */
+    private function writeLockedMessage(OutputInterface $output)
+    {
+        $commandName = $this->decoratedCommand->getName();
+        $lockName = $this->getLockName();
+        $lockPath = $this->getLockPath();
+        $message = sprintf(
+            '<info>Command "%s" is already running, locked with "%s" at path "%s"</info>',
+            $commandName,
+            $lockName,
+            $lockPath
+        );
+
+        $output->writeln($message);
     }
 }

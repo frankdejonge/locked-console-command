@@ -108,12 +108,13 @@ class LockedCommandDecoratorSpec extends ObjectBehavior
         $this->shouldThrow('RuntimeException')->duringRun($input, $output);
     }
 
-    public function it_should_create_a_lock_handler(Command $command, InputInterface $input, OutputInterface $output)
+    public function it_should_respect_a_file_lock(Command $command, InputInterface $input, OutputInterface $output)
     {
         $this->beConstructedWith($command, 'lock:name');
         $lockHandler = new LockHandler('lock:name');
         $lockHandler->lock();
-        $this->shouldThrow('RuntimeException')->during('run', [$input, $output]);
+        $output->writeln(Argument::type('string'))->shouldBeCalled();
+        $this->run($input, $output);
     }
 
     public function it_should_get_the_lock_name_from_the_command(Command $command)
