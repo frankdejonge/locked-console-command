@@ -29,9 +29,9 @@ class LockedCommandDecorator extends Command
     /**
      * Constructor.
      *
-     * @param Command $command
-     * @param string|LockHandler    $lockName
-     * @param string    $lockPath
+     * @param Command            $command
+     * @param string|LockHandler $lockName
+     * @param string             $lockPath
      */
     public function __construct(Command $command, $lockName = null, $lockPath = null)
     {
@@ -299,7 +299,7 @@ class LockedCommandDecorator extends Command
     /**
      * Get the locking helper.
      *
-     * @param InputInterface $input
+     * @param  InputInterface $input
      * @return LockHandler
      */
     private function getLockHandler(InputInterface $input)
@@ -317,7 +317,7 @@ class LockedCommandDecorator extends Command
     /**
      * Get the name for the lock.
      *
-     * @param InputInterface $input
+     * @param  InputInterface $input
      * @return string
      */
     public function getLockName(InputInterface $input)
@@ -340,7 +340,7 @@ class LockedCommandDecorator extends Command
     /**
      * Get the lock path.
      *
-     * @param InputInterface $input
+     * @param  InputInterface $input
      * @return null|string
      */
     public function getLockPath(InputInterface $input)
