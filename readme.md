@@ -35,8 +35,8 @@ $app->run();
 The decorator uses a file lock (supplied by Symfony's LockHandler) to
 ensure a lock is set before and released after executing the command.
 
-If a lock is already set for a given task, an exception is thrown which
-prevents the decorated command to be executed.
+If a lock is already set for a given task, an info message is shown and
+the decorated command is prevented from running.
 
 ## Configuration
 
