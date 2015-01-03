@@ -1,4 +1,4 @@
-# Symfony Console Locked Commands
+# Symfony (or Laravel) Console Locked Commands
 
 In some cases, you'll want only one process of a certain command
 to be able to run at a time. The Command decorator supplied in this
@@ -28,6 +28,13 @@ use Symfony\Component\Console\Application;
 $application = new Application;
 $app->add(new LockedCommandDecorator(new YourConsoleCommand()));
 $app->run();
+```
+
+### Laravel Usage
+
+```php
+use FrankDeJonge\LockedConsoleCommand\LockedCommandDecorator;
+Artisan::add(new LockedCommandDecorator(new SomeCommand()));
 ```
 
 # How does the locking work?
