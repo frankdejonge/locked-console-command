@@ -378,6 +378,8 @@ class LockedCommandDecorator extends Command
             $lockPath
         );
 
-        $output->writeln($message);
+        if ($output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
+            $output->writeln($message);
+        }
     }
 }
