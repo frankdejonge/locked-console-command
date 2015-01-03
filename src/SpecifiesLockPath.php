@@ -2,6 +2,8 @@
 
 namespace FrankDeJonge\LockedConsoleCommand;
 
+use Symfony\Component\Console\Input\InputInterface;
+
 interface SpecifiesLockPath
 {
     /**
@@ -9,5 +11,5 @@ interface SpecifiesLockPath
      *
      * @return string
      */
-    public function getLockPath();
+    public function getLockPath(InputInterface $input);
 }

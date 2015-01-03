@@ -2,6 +2,8 @@
 
 namespace FrankDeJonge\LockedConsoleCommand;
 
+use Symfony\Component\Console\Input\InputInterface;
+
 interface SpecifiesLockName
 {
     /**
@@ -9,5 +11,5 @@ interface SpecifiesLockName
      *
      * @return string
      */
-    public function getLockName();
+    public function getLockName(InputInterface $input);
 }

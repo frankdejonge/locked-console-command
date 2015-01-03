@@ -117,31 +117,31 @@ class LockedCommandDecoratorSpec extends ObjectBehavior
         $this->run($input, $output);
     }
 
-    public function it_should_get_the_lock_name_from_the_command(Command $command)
+    public function it_should_get_the_lock_name_from_the_command(Command $command, InputInterface $input)
     {
         $this->beConstructedWith($command);
         $command->getName()->willReturn('command:name');
-        $this->getLockName()->shouldBe('command:name');
+        $this->getLockName($input)->shouldBe('command:name');
     }
 
-    public function it_should_get_the_lock_name_from_the_specifier()
+    public function it_should_get_the_lock_name_from_the_specifier(InputInterface $input)
     {
         $command = new \CommandThatSpecifiesTheLockName('name');
         $this->beConstructedWith($command);
-        $this->getLockName()->shouldBe('specified.lock.name');
+        $this->getLockName($input)->shouldBe('specified.lock.name');
     }
 
-    public function it_should_get_the_lock_path_from_the_specifier()
+    public function it_should_get_the_lock_path_from_the_specifier(InputInterface $input)
     {
         $command = new \CommandThatSpecifiesTheLockPath('name');
         $this->beConstructedWith($command);
-        $this->getLockPath()->shouldBe('/tmp/lock/path/');
+        $this->getLockPath($input)->shouldBe('/tmp/lock/path/');
     }
 
-    public function it_should_get_the_lock_path_and_name_if_injected(Command $command)
+    public function it_should_get_the_lock_path_and_name_if_injected(Command $command, InputInterface $input)
     {
         $this->beConstructedWith($command, 'lock.name', 'lock.path');
-        $this->getLockName()->shouldBe('lock.name');
-        $this->getLockPath()->shouldBe('lock.path');
+        $this->getLockName($input)->shouldBe('lock.name');
+        $this->getLockPath($input)->shouldBe('lock.path');
     }
 }

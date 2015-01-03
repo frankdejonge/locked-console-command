@@ -53,3 +53,12 @@ $command = new LockedCommandDecorator($yourCommand, 'lock-name', '/lock/path'));
 
 * Implement `FrankDeJonge\LockedConsoleCommand\SpecifiesLockName` (`::getLockName()`)
 * Implement `FrankDeJonge\LockedConsoleCommand\SpecifiesLockPath` (`::getLockPath()`)
+
+The SpecifiesLockName interface is especially handy with dynamic lock names, for example:
+
+```php
+
+class SomeQueueWorker extends Command implements SpecifiesLockName
+{
+    
+}

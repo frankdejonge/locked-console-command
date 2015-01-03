@@ -111,10 +111,10 @@ class LockedCommandDecorator extends Command
      */
     public function run(InputInterface $input, OutputInterface $output)
     {
-        $lock = $this->getLockHandler();
+        $lock = $this->getLockHandler($input);
 
         if (! $lock->lock()) {
-            $this->writeLockedMessage($output);
+            $this->writeLockedMessage($input, $output);
 
             return 0;
         }
@@ -425,14 +425,14 @@ class LockedCommandDecorator extends Command
     /**
      * @return LockHandler
      */
-    private function getLockHandler()
+    private function getLockHandler(InputInterface $input)
     {
         if ($this->lockName instanceof LockHandler) {
             return $this->lockName;
         }
 
-        $lockName = $this->getLockName();
-        $lockPath = $this->getLockPath();
+        $lockName = $this->getLockName($input);
+        $lockPath = $this->getLockPath($input);
 
         return new LockHandler($lockName, $lockPath);
     }
@@ -442,7 +442,7 @@ class LockedCommandDecorator extends Command
      *
      * @return string
      */
-    public function getLockName()
+    public function getLockName(InputInterface $input)
     {
         if (is_string($this->lockName)) {
             return $this->lockName;
@@ -453,7 +453,7 @@ class LockedCommandDecorator extends Command
         }
 
         if ($this->decoratedCommand instanceof SpecifiesLockName) {
-            return $this->decoratedCommand->getLockName();
+            return $this->decoratedCommand->getLockName($input);
         }
 
         return $this->decoratedCommand->getName();
@@ -462,9 +462,10 @@ class LockedCommandDecorator extends Command
     /**
      * Get the lock path.
      *
+     * @param InputInterface $input
      * @return null|string
      */
-    public function getLockPath()
+    public function getLockPath(InputInterface $input)
     {
         if ($this->lockName instanceof LockHandler) {
             return 'UNKNOWN';
@@ -475,7 +476,7 @@ class LockedCommandDecorator extends Command
         }
 
         if ($this->decoratedCommand instanceof SpecifiesLockPath) {
-            return $this->decoratedCommand->getLockPath();
+            return $this->decoratedCommand->getLockPath($input);
         }
 
         return null;
@@ -486,11 +487,11 @@ class LockedCommandDecorator extends Command
      *
      * @param OutputInterface $output
      */
-    private function writeLockedMessage(OutputInterface $output)
+    private function writeLockedMessage(InputInterface $input, OutputInterface $output)
     {
         $commandName = $this->decoratedCommand->getName();
-        $lockName = $this->getLockName();
-        $lockPath = $this->getLockPath();
+        $lockName = $this->getLockName($input);
+        $lockPath = $this->getLockPath($input);
         $message = sprintf(
             '<info>Command "%s" is already running, locked with "%s" at path "%s"</info>',
             $commandName,
