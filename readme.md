@@ -61,7 +61,7 @@ There are two configurable parts to influence locking.
 1. The lock name
 2. The lock path
 
-### Trough __constructor argument injection
+### Through __constructor argument injection
 
 ```php
 $command = new LockedCommandDecorator($yourCommand, 'lock-name', '/lock/path'));
@@ -72,7 +72,7 @@ $command = new LockedCommandDecorator($yourCommand, 'lock-name', '/lock/path'));
 * Implement `FrankDeJonge\LockedConsoleCommand\SpecifiesLockName` (`::getLockName()`)
 * Implement `FrankDeJonge\LockedConsoleCommand\SpecifiesLockPath` (`::getLockPath()`)
 
-The SpecifiesLockName interface is especially handy with dynamic lock names, for example:
+The `SpecifiesLockName` interface is especially handy with dynamic lock names, for example:
 
 ```php
 
