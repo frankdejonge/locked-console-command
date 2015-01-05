@@ -79,8 +79,11 @@ class LockedCommandDecoratorSpec extends ObjectBehavior
         $this->setDefinition($inputDefinition);
     }
 
-    public function it_should_should_delegate_run_calls(Command $command, InputInterface $input, OutputInterface $output, LockHandler $lockHandler)
+    public function it_should_should_delegate_run_calls(Command $command, InputInterface $input, OutputInterface $output, LockHandler $lockHandler, InputDefinition $definition)
     {
+        $command->mergeApplicationDefinition(true)->shouldBeCalled();
+        $command->getDefinition()->willReturn($definition);
+        $input->bind($definition)->shouldBeCalled();
         $this->beConstructedWith($command, $lockHandler);
         $lockHandler->lock()->willReturn(true);
         $lockHandler->release()->shouldBeCalled();
@@ -88,8 +91,12 @@ class LockedCommandDecoratorSpec extends ObjectBehavior
         $this->run($input, $output)->shouldBe('command:output');
     }
 
-    public function it_should_release_the_lock_when_an_exception_is_thrown(Command $command, InputInterface $input, OutputInterface $output, LockHandler $lockHandler)
+    public function it_should_release_the_lock_when_an_exception_is_thrown(Command $command, InputInterface $input, OutputInterface $output, LockHandler $lockHandler, InputDefinition $definition)
     {
+        $command->mergeApplicationDefinition(true)->shouldBeCalled();
+        $command->getDefinition()->willReturn($definition);
+        $input->bind($definition)->shouldBeCalled();
+
         $this->beConstructedWith($command, $lockHandler);
         $command->run($input, $output)->willThrow('Exception');
         $lockHandler->lock()->willReturn(true);
@@ -97,8 +104,12 @@ class LockedCommandDecoratorSpec extends ObjectBehavior
         $this->shouldThrow('Exception')->during('run', [$input, $output]);
     }
 
-    public function it_should_block_runs_when_there_is_a_lock(Command $command, InputInterface $input, OutputInterface $output, LockHandler $lockHandler)
+    public function it_should_block_runs_when_there_is_a_lock(Command $command, InputInterface $input, OutputInterface $output, LockHandler $lockHandler, InputDefinition $definition)
     {
+        $command->mergeApplicationDefinition(true)->shouldBeCalled();
+        $command->getDefinition()->willReturn($definition);
+        $input->bind($definition)->shouldBeCalled();
+
         $this->beConstructedWith($command, $lockHandler);
         $command->getName()->willReturn('command:name');
         $output->getFormatter()->willReturn(new OutputFormatter());
@@ -107,14 +118,19 @@ class LockedCommandDecoratorSpec extends ObjectBehavior
         $this->shouldThrow('RuntimeException')->duringRun($input, $output);
     }
 
-    public function it_should_respect_a_file_lock(Command $command, InputInterface $input, OutputInterface $output)
+    public function it_should_respect_a_file_lock(Command $command, InputInterface $input, OutputInterface $output, InputDefinition $definition)
     {
-        $this->beConstructedWith($command, 'lock:name');
         $lockHandler = new LockHandler('lock:name');
         $lockHandler->lock();
+        $command->getName()->willReturn('command:name');
+        $command->mergeApplicationDefinition(true)->shouldBeCalled();
+        $command->getDefinition()->willReturn($definition);
+        $input->bind($definition)->shouldBeCalled();
         $output->getVerbosity()->willReturn(OutputInterface::VERBOSITY_VERBOSE);
         $output->writeln(Argument::type('string'))->shouldBeCalled();
-        $this->run($input, $output);
+        $this->beConstructedWith($command, 'lock:name');
+        $this->run($input, $output)->shouldBe(0);
+        $lockHandler->release();
     }
 
     public function it_should_get_the_lock_name_from_the_command(Command $command, InputInterface $input)

@@ -110,6 +110,8 @@ class LockedCommandDecorator extends Command
      */
     public function run(InputInterface $input, OutputInterface $output)
     {
+        $this->mergeApplicationDefinition();
+        $input->bind($this->getDefinition());
         $lock = $this->getLockHandler($input);
 
         if (! $lock->lock()) {
