@@ -362,7 +362,7 @@ class LockedCommandDecorator extends Command
             return $this->decoratedCommand->getLockPath($input);
         }
 
-        return null;
+        return sys_get_temp_dir();
     }
 
     /**
