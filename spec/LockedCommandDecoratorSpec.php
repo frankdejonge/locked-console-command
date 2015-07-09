@@ -63,8 +63,8 @@ class LockedCommandDecoratorSpec extends ObjectBehavior
         $this->getNativeDefinition()->shouldBe($inputDefinition);
         $command->getProcessedHelp()->willReturn('processed:help');
         $this->getProcessedHelp()->shouldBe('processed:help');
-        $command->getSynopsis()->willReturn('synopsis');
-        $this->getSynopsis()->shouldBe('synopsis');
+        $command->getSynopsis(false)->willReturn('synopsis');
+        $this->getSynopsis(false)->shouldBe('synopsis');
         $command->ignoreValidationErrors()->shouldBeCalled();
         $this->ignoreValidationErrors();
         $command->isEnabled()->willReturn(true);

@@ -288,9 +288,9 @@ class LockedCommandDecorator extends Command
     /**
      * {@inheritdoc}
      */
-    public function getSynopsis()
+    public function getSynopsis($short = false)
     {
-        return $this->decoratedCommand->getSynopsis();
+        return $this->decoratedCommand->getSynopsis($short);
     }
 
     /**
