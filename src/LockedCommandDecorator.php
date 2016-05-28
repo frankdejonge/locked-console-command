@@ -134,7 +134,7 @@ class LockedCommandDecorator extends Command
     /**
      * {@inheritdoc}
      */
-    public function setCode($code)
+    public function setCode(callable $code)
     {
         $this->decoratedCommand->setCode($code);
 

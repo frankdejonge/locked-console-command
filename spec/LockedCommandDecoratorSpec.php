@@ -35,8 +35,8 @@ class LockedCommandDecoratorSpec extends ObjectBehavior
         $this->setProcessTitle('process:title');
         $command->setAliases(['alias'])->shouldBeCalled();
         $this->setAliases(['alias']);
-        $command->setCode('code:input')->shouldBeCalled();
-        $this->setCode('code:input');
+        $command->setCode(Argument::that('is_callable'))->shouldBeCalled();
+        $this->setCode(function () {});
         $command->setDescription('description')->shouldBeCalled();
         $this->setDescription('description');
         $command->addArgument('name', 1, 'desc', 'default')->shouldBeCalled();

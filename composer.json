@@ -7,9 +7,9 @@
         }
     },
     "require": {
-        "php": ">=5.4",
-        "symfony/console": "~2.5",
-        "symfony/filesystem": "~2.6"
+        "php": ">=5.5.9",
+        "symfony/console": "~3.0",
+        "symfony/filesystem": "~3.0"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.1",
