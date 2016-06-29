@@ -2,7 +2,6 @@
 
 namespace FrankDeJonge\LockedConsoleCommand;
 
-use Exception;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\HelperSet;
@@ -114,21 +113,17 @@ class LockedCommandDecorator extends Command
         $input->bind($this->getDefinition());
         $lock = $this->getLockHandler($input);
 
-        if (! $lock->lock()) {
+        if ( ! $lock->lock()) {
             $this->writeLockedMessage($input, $output);
 
-            return 0;
+            return 1;
         }
 
         try {
-            $result = $this->decoratedCommand->run($input, $output);
+            return $this->decoratedCommand->run($input, $output);
+        } finally {
             $lock->release();
-        } catch (Exception $e) {
-            $lock->release();
-            throw $e;
         }
-
-        return $result;
     }
 
     /**
@@ -305,6 +300,7 @@ class LockedCommandDecorator extends Command
      * Get the locking helper.
      *
      * @param  InputInterface $input
+     *
      * @return LockHandler
      */
     private function getLockHandler(InputInterface $input)
@@ -323,6 +319,7 @@ class LockedCommandDecorator extends Command
      * Get the name for the lock.
      *
      * @param  InputInterface $input
+     *
      * @return string
      */
     public function getLockName(InputInterface $input)
@@ -346,6 +343,7 @@ class LockedCommandDecorator extends Command
      * Get the lock path.
      *
      * @param  InputInterface $input
+     *
      * @return null|string
      */
     public function getLockPath(InputInterface $input)

@@ -129,7 +129,7 @@ class LockedCommandDecoratorSpec extends ObjectBehavior
         $output->getVerbosity()->willReturn(OutputInterface::VERBOSITY_VERBOSE);
         $output->writeln(Argument::type('string'))->shouldBeCalled();
         $this->beConstructedWith($command, 'lock:name');
-        $this->run($input, $output)->shouldBe(0);
+        $this->run($input, $output)->shouldBe(1);
         $lockHandler->release();
     }
 
