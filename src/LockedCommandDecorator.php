@@ -375,7 +375,7 @@ class LockedCommandDecorator extends Command
         $lockName = $this->getLockName($input);
         $lockPath = $this->getLockPath($input);
         $message = sprintf(
-            '<info>Command "%s" is already running, locked with "%s" at path "%s"</info>',
+            '<error>Command "%s" is already running, locked with "%s" at path "%s"</error>',
             $commandName,
             $lockName,
             $lockPath
