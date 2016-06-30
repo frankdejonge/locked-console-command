@@ -381,6 +381,10 @@ class LockedCommandDecorator extends Command
             $lockPath
         );
 
+        if ($output instanceof ConsoleOutputInterface) {
+            $output = $output->getErrorOutput();
+        }
+
         if ($output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
             $output->writeln($message);
         }
